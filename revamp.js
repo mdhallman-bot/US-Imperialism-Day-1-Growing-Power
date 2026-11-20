@@ -37,7 +37,7 @@ context:[
 'At the same time, different sectors of the economy had different interests, and economic growth did not mean that every American benefited equally.',
 'When we examine export values, we must distinguish a documented trend from a claim about what caused that trend.'
 ],
-image:'https://upload.wikimedia.org/wikipedia/commons/2/29/New_York_Harbor_1900.jpg',
+image:'https://www.shorpy.com/files/images/SHORPY_4a09256a.preview.jpg',
 imageCaption:'Historic New York Harbor photograph (visual context; if this reproduction is unavailable, use the documented table).',
 source:'Historical Statistics of the United States, merchandise exports, selected years.',
 claim:'American exports increased, so overseas annexation must have caused the growth.',
@@ -59,7 +59,7 @@ context:[
 'But many Native Hawaiians organized against annexation because it threatened their national independence.',
 'The question was not only whether Hawaiʻi was useful to the United States, but whose consent mattered when one country sought control over another.'
 ],
-image:'https://upload.wikimedia.org/wikipedia/commons/2/2d/Liliuokalani_of_Hawaii.jpg',
+image:'https://cdn.loc.gov/service/pnp/cph/3c00000/3c05000/3c05800/3c05894v.jpg',
 imageCaption:'Queen Liliʻuokalani; historical photograph.',
 map:'authentic:pacific',
 mapCaption:'Historical U.S. acquisitions map showing the relative location of Hawaiʻi and Pacific territories (adapted textbook map).',
@@ -82,7 +82,7 @@ context:[
 'U.S. policymakers considered alternatives, including a route through Nicaragua, and Roosevelt supported the Panamanian separation movement.',
 'Even after a treaty was signed, the canal required difficult construction work by thousands of laborers and would profoundly affect local sovereignty.'
 ],
-image:'https://upload.wikimedia.org/wikipedia/commons/5/58/Panama_Canal_-_Culebra_Cut_construction.jpg',
+image:'https://tile.loc.gov/storage-services/service/pnp/det/4a20000/4a24000/4a24800/4a24804v.jpg',
 imageCaption:'Panama Canal construction-era image; historical context.',
 map:'https://philschatz.com/us-history-book/resources/CNX_History_22_01_Imperial.jpg',
 mapCaption:'U.S. acquisitions map provides geographic context; compare Panama’s position with the Oregon route.',
@@ -106,7 +106,7 @@ context:[
 'Dominican officials participated in negotiations, but the arrangement sharply limited how independently the country could manage that revenue.',
 'The case shows that a country can expand its influence without formally annexing another nation.'
 ],
-image:'https://upload.wikimedia.org/wikipedia/commons/f/fa/The_world%27s_constable.jpg',
+image:'https://assets.realclear.com/images/70/702509_6_.jpg',
 imageCaption:'Period imperialism cartoon of Roosevelt as a constable (verify source and details with original image).',
 source:'Foreign Relations of the United States (1905), Dominican customs arrangements.',
 claim:'If foreign creditors receive payment, American intervention must have protected Dominican independence.',
@@ -132,7 +132,7 @@ const h=el.querySelector('h2'),lead=h.nextElementSibling;lead.innerHTML=vocab(in
 h.after(banner);
 const media=document.createElement('div');media.className='historical-media';media.innerHTML='<figure><img loading="lazy" src="'+esc(cfg.image)+'" alt="Historical image connected to '+esc(s.title)+'" onerror="this.style.display=\'none\';this.nextElementSibling.hidden=false"><p hidden class="note">Image unavailable on this network; use the reading and its source instead.</p><figcaption>'+vocab(cfg.imageCaption)+'</figcaption></figure>'+(cfg.map?'<figure><div data-authentic-map="'+esc(cfg.map.split(':')[1])+'"></div><figcaption>'+vocab(cfg.mapCaption)+'</figcaption></figure>':'');
 banner.after(media);
-const diagramEl=el.querySelector('svg');if(diagramEl){const p=diagramEl.parentElement;if(p)p.removeChild(diagramEl);const small=el.querySelector('p.small');if(small&&small.textContent.includes('Illustrative route'))small.remove()}
+const diagramEl=el.querySelector('svg');if(diagramEl){const p=diagramEl.parentElement;if(p)p.removeChild(diagramEl);el.querySelectorAll('p.small').forEach(small=>{if(small.textContent.includes('Illustrative route')||small.textContent.includes('Schematic relative'))small.remove()})}
 const checkFields=[...el.querySelectorAll('[data-field]')].filter(x=>x.id.startsWith(s.id+'_check')||x.id===s.id+'_after');
 for(const x of checkFields){x.closest('.field')?.remove();const i=registry.findIndex(f=>f.id===x.id);if(i>=0)registry.splice(i,1)}
 const prior=el.querySelector('#'+s.id+'_investigate');const sub=document.createElement('div');sub.className='deep-analysis';
@@ -154,7 +154,41 @@ document.addEventListener('click',e=>{const next=e.target.closest('[data-page-ne
 const oldOpen=open;$('open').onclick=async()=>{await oldOpen();if(state){rankUi();switchTo(Math.min(Number(state.fields.ui_current_step)||0,screens.length-1));$('pageTitle').textContent=titles[current]}};
 screens.forEach((el,i)=>el.style.display=i===0?'block':'none');
 }
+
+Object.assign(GLOSSARY,{
+'naval readiness':'How prepared a navy is for missions or danger.',
+'coaling station':'A port where a steamship takes on coal for fuel.',
+'projection of power':'Using military or economic strength to influence distant places.',
+'geographic constraint':'A limitation caused by location or distance.',
+'commercial interest':'An economic goal related to trade and business.',
+'causal claim':'An argument that one event or condition helped cause another.',
+'industrial capacity':'The ability to make products using factories and workers.',
+'strategic alternative':'Another realistic choice to reach an important goal.',
+'labor conditions':'The pay, safety and treatment experienced by workers.',
+'financial control':'The authority to decide how money is collected or spent.',
+'Roosevelt Corollary':'Roosevelt’s 1904 claim that the U.S. could intervene in Latin America to prevent European intervention.',
+'isthmus':'A narrow strip of land between two large areas of land.',
+'consent of the governed':'The idea that people should agree to the government that rules them.',
+'commercial leverage':'Economic influence that can shape other decisions.',
+'naval power':'The ability to use warships to protect or exert influence.',
+'qualify':'Make a claim more accurate by adding limits.',
+'legitimacy':'Whether authority or an action is rightfully justified.',
+'credible':'Supported by reasons or evidence that deserve trust.',
+'defensible':'Able to be supported by good reasons and evidence.',
+'context':'The surrounding historical circumstances.',
+'nuanced':'Recognizing more than one important side or factor.',
+'plausible':'Reasonable, even if not proven.',
+'underlying':'Forming the deeper basis of something.'
+});
+const newVocabPattern=new RegExp('\\b('+Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length).join('|')+')\\b','gi');
+vocab=function(text){return String(text).split(newVocabPattern).map(part=>{const explanation=GLOSSARY[part.toLowerCase()];return explanation?'<button type="button" class="term" aria-expanded="false" title="'+esc(explanation)+'">'+esc(part)+'</button><span hidden class="def">'+esc(explanation)+'</span>':esc(part)}).join('')};
+
 richPrepare();
 installNavigation();
 document.addEventListener('click',e=>{const c=e.target.closest('[data-rank-confirm]');if(c&&state){const id=c.dataset.rankConfirm;state.fields[id]=$(id).value;const label=c.parentElement.querySelector('.rank-confirmed');if(label)label.textContent='Ranking recorded';changed();return}const b=e.target.closest('[data-rank-move]');if(!b||!state)return;const id=b.dataset.rankMove,arr=$(id).value.split('|'),i=Number(b.dataset.idx),j=i+Number(b.dataset.dir);if(j<0||j>=arr.length)return;[arr[i],arr[j]]=[arr[j],arr[i]];state.fields[id]=arr.join('|');rankUi();const label=b.closest('[data-rank]').querySelector('.rank-confirmed');if(label)label.textContent='Ranking recorded';changed()});
 const styles=document.createElement('style');styles.textContent='.hero{background:#ecf1f5;border-radius:12px;padding:14px;margin-bottom:20px}.hero img{width:100%;max-height:240px;object-fit:contain}.sourcekit p{margin:11px 0}.storyboard{background:#f7f1df;padding:12px;border-radius:8px}.word-list{display:flex;flex-wrap:wrap;gap:8px}.word-list span{border:1px solid #bfcbd5;border-radius:99px;padding:4px 12px}.callout{border-left:4px solid #3979a6;background:#eff6fb;padding:10px}.historical-media{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.historical-media img{width:100%;height:auto;max-height:320px;object-fit:contain}.historical-media figcaption{font-size:13px}.claim{background:#fff7e6;padding:12px;border-radius:7px}.deep-analysis{border-top:2px solid #cbd7de;margin-top:18px}.rank-row{display:flex;align-items:center;gap:10px;border:1px solid #cdd9df;padding:8px;margin:6px 0;border-radius:8px}.rank-row span{flex:1}.rank-row button{padding:5px 10px;margin:0}.page-actions{display:flex;align-items:center;gap:8px;border-top:2px solid #d7e0e4;padding-top:20px;margin-top:25px}.page-count{margin-left:auto;font-size:14px;color:#435764}.ranking-block{background:#f1f5f9;padding:15px;border-radius:8px}.field.deep textarea{min-height:112px}.evidence-pair{margin:22px 0;border:2px solid #d4e2ea;border-radius:10px;padding:14px}.evidence-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.evidence-columns>div{background:#f1f6f9;padding:13px;border-radius:7px}.rank-confirmed{font-size:14px;margin-left:8px;color:#276b49}[data-authentic-map] svg{max-width:100%;height:auto;border:1px solid #d0d9df;border-radius:8px}#nav{display:none}';document.head.append(styles);
+
+const imageViewer=$('viewer'),imageLarge=$('large');
+$('closeImage').onclick=()=>imageViewer.close();
+document.addEventListener('click',e=>{const img=e.target.closest('.historical-media img,.hero img');if(!img||!img.getAttribute('src')||img.style.display==='none')return;imageLarge.src=img.src;imageLarge.alt=img.alt||'Enlarged historical image';imageViewer.showModal()});
+imageViewer.addEventListener('click',e=>{if(e.target===imageViewer)imageViewer.close()});
