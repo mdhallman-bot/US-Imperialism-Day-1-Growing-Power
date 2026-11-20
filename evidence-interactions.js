@@ -29,6 +29,72 @@
       }
     }
   }
+
+  // Replace instructional summaries elsewhere with explicitly attributed original evidence.
+  // Context paragraphs are labeled as teacher descriptions, not original-source quotations.
+  const archival={
+    economy:{
+      a:['Historical merchandise exports','U.S. historical statistical series, selected years',
+        '1870: $451 million; 1880: $853 million; 1890: $910 million; 1900: $1,499 million.',
+        'https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html',
+        'Transcribed nominal-dollar figures from the historical exports series. These document growth, not the cause of that growth.'],
+      b:['Alfred Thayer Mahan: commerce and naval protection','Published argument, 1890',
+        'The ships that thus sail to and fro must have secure ports to which to return',
+        'https://www.historians.org/resource/the-influence-of-sea-power-on-history/',
+        'Mahan advocates protection for commerce. His argument demonstrates a particular justification for sea power, not agreement among all businesses.'],
+      question:'How does the export trend help explain an economic incentive, and what does Mahan add about protecting trade? Which causal claim about territorial expansion remains unproven?',
+      frames:['The statistical series establishes ___, while Mahan argues ___. The sources do not prove ___.','The numerical trend documents ___, and Mahan provides an argument for ___. To evaluate whether ___ caused ___, we would need ___.']
+    },
+    hawaii:{
+      a:['Queen Liliʻuokalani protests U.S. ownership','Letter to U.S. House of Representatives, December 1898',
+        'I especially protest against such assertion of ownership as a taking of property without due process of law',
+        'https://www.archives.gov/milestone-documents/joint-resolution-for-annexing-the-hawaiian-islands',
+        'The queen challenges U.S. claims to Hawaiian Crown Lands. This document offers a Hawaiian leader’s perspective; it is not the 1897 mass petition.'],
+      b:['Congress declares annexation','Newlands Resolution, July 1898',
+        'the said Hawaiian Islands and their dependencies be, and they are hereby, annexed as a part of the territory of the United States',
+        'https://www.archives.gov/milestone-documents/joint-resolution-for-annexing-the-hawaiian-islands',
+        'The congressional resolution establishes the legal action taken by the United States; its assertion of consent refers to the Republic of Hawaii government, not a popular vote.'],
+      question:'How do the queen’s protest and the annexation resolution complicate the claim that the islands’ strategic value justified U.S. control? Which voices or evidence are still missing?',
+      frames:['The resolution establishes ___, while the queen contests ___. These sources leave unanswered ___.','Although the U.S. government claimed authority to ___, Liliʻuokalani challenged ___; this distinction matters because ___.']
+    },
+    panama:{
+      a:['Hay–Bunau-Varilla Treaty','U.S.–Panama treaty, November 1903',
+        'grants to the United States in perpetuity the use, occupation and control of a zone of land',
+        'https://avalon.law.yale.edu/20th_century/pan001.asp',
+        'The treaty specifies long-term U.S. control of a canal zone; it is the agreement itself, not an interpretation of its fairness.'],
+      b:['Panamanian municipal support','Panamanian municipal resolution, December 1903',
+        'the canal be excavated for its own service and for the benefit of universal commerce',
+        'https://history.state.gov/historicaldocuments/frus1903/d329',
+        'Some local political bodies publicly supported building a canal and ratifying the treaty. This does not establish unanimous Panamanian support.'],
+      question:'What can the treaty and municipal resolution establish about canal control and some Panamanian support? Why would it be incorrect to conclude that all Panamanians consented?',
+      frames:['The treaty establishes ___, and the municipal resolution demonstrates ___. Neither proves ___.','These documents provide evidence of ___ and ___, but the scope of consent remains uncertain because ___.']
+    },
+    dominican:{
+      a:['Roosevelt explains customs administration','Annual message to Congress, 1905',
+        'turning over 45 per cent to the Government for running expenses and putting the other 55 per cent into a safe depositary',
+        'https://history.state.gov/historicaldocuments/frus1905/message-of-the-president',
+        'Roosevelt’s statement documents and defends the allocation, but it is also a political argument made to Congress.'],
+      b:['U.S. diplomatic account of the arrangement','Diplomatic report, 1905',
+        'impartial and competent Americans shall collect all the customs duties, paying 45 per cent to the Dominican Government',
+        'https://history.state.gov/historicaldocuments/frus1905/d345',
+        'A U.S. diplomatic source explains who collects the duties. Both sources originate in U.S. official circles, so they are not fully independent perspectives.'],
+      question:'What do the two sources actually establish about financial control, and what important perspective is missing before deciding whether the arrangement was justified?',
+      frames:['Both sources indicate ___ about control of customs revenue. They do not provide the perspective of ___.','Despite agreement on ___, these two U.S. government sources cannot fully corroborate ___ because ___.']
+    }
+  };
+  for(const [id,d] of Object.entries(archival)){
+    const sec=document.getElementById(id),box=sec?.querySelector('.evidence-pair');
+    if(!box)continue;
+    box.innerHTML='<h3>Investigate original historical evidence</h3><p class="small">These are selected, attributed excerpts or historical figures. Read their source context before drawing a conclusion. Short excerpts never represent an entire document.</p><div class="actual-source-grid">'+
+      sourceCard('A',...d.a)+sourceCard('B',...d.b)+
+      '</div><div class="source-thinking"><strong>Source-reading prompts</strong><p>Who produced each source? What was that person or institution trying to accomplish? Where do the sources agree or conflict? Whose experience is not represented?</p></div>';
+    const label=sec.querySelector('label[for="'+id+'_compare"]');
+    if(label)label.innerHTML=vocab(d.question);
+    const frames=sec.querySelector('#'+id+'_compare')?.parentElement.querySelectorAll('.frame')||[];
+    if(frames[0])frames[0].innerHTML=vocab(d.frames[0]);
+    if(frames[1])frames[1].innerHTML=vocab(d.frames[1]);
+  }
+
   // Drag-and-drop is a *presentation* enhancement. The existing rank-field IDs and
   // changed() save pipeline remain authoritative; no changes to backend, records, or PDFs.
   let dragged=null;
