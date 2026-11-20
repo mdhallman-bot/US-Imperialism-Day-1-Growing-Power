@@ -35,9 +35,9 @@
   const archival={
     economy:{
       a:['Historical merchandise exports','U.S. historical statistical series, selected years',
-        '1870: $451 million; 1880: $853 million; 1890: $910 million; 1900: $1,499 million.',
+        '1870: $451 million; 1880: $853 million; 1890: $910 million.',
         'https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html',
-        'Transcribed nominal-dollar figures from the historical exports series. These document growth, not the cause of that growth.'],
+        'Transcribed nominal-dollar figures from a compiled historical exports series, not a contemporary quotation. The 1900 value remains concealed until the section reveal.'],
       b:['Alfred Thayer Mahan: commerce and naval protection','Published argument, 1890',
         'The ships that thus sail to and fro must have secure ports to which to return',
         'https://www.historians.org/resource/the-influence-of-sea-power-on-history/',
@@ -70,16 +70,16 @@
       frames:['The treaty establishes ___, and the municipal resolution demonstrates ___. Neither proves ___.','These documents provide evidence of ___ and ___, but the scope of consent remains uncertain because ___.']
     },
     dominican:{
-      a:['Roosevelt explains customs administration','Annual message to Congress, 1905',
-        'turning over 45 per cent to the Government for running expenses and putting the other 55 per cent into a safe depositary',
-        'https://history.state.gov/historicaldocuments/frus1905/message-of-the-president',
-        'Roosevelt’s statement documents and defends the allocation, but it is also a political argument made to Congress.'],
-      b:['U.S. diplomatic account of the arrangement','Diplomatic report, 1905',
-        'impartial and competent Americans shall collect all the customs duties, paying 45 per cent to the Dominican Government',
-        'https://history.state.gov/historicaldocuments/frus1905/d345',
-        'A U.S. diplomatic source explains who collects the duties. Both sources originate in U.S. official circles, so they are not fully independent perspectives.'],
-      question:'What do the two sources actually establish about financial control, and what important perspective is missing before deciding whether the arrangement was justified?',
-      frames:['Both sources indicate ___ about control of customs revenue. They do not provide the perspective of ___.','Despite agreement on ___, these two U.S. government sources cannot fully corroborate ___ because ___.']
+      a:['Roosevelt: U.S. authority to intervene','Annual presidential message to Congress, December 1904',
+        'the exercise of an international police power',
+        'https://www.archives.gov/milestone-documents/roosevelt-corollary',
+        'Roosevelt claimed a U.S. role in regional intervention to prevent foreign pressure and what he called wrongdoing. This is a justification, not evidence that a particular financial division was fair.'],
+      b:['An earlier customs-revenue proposal','U.S. diplomatic correspondence reporting negotiations, 1905',
+        'Distribute 40 per cent annual receipts among all creditors, remaining 60 to the Dominican Government.',
+        'https://history.state.gov/historicaldocuments/frus1905/papers',
+        'This recorded proposal precedes the final temporary arrangement. It shows that the allocation was contested and negotiated; it does not reveal the eventual distribution.'],
+      question:'How does Roosevelt’s justification differ from the financial proposal? What do these sources establish about U.S. aims, and whose judgment about fairness is still missing?',
+      frames:['Roosevelt argued ___, while the proposal would divide ___; neither source establishes ___.','The argument for intervention addresses ___, whereas the allocation proposal concerns ___. A credible evaluation would also require ___ because ___.']
     }
   };
   for(const [id,d] of Object.entries(archival)){
