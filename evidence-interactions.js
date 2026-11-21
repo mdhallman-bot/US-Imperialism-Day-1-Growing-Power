@@ -59,7 +59,7 @@
     },
     panama:{
       a:['Hay–Bunau-Varilla Treaty','U.S.–Panama treaty, November 1903',
-        'grants to the United States in perpetuity the use, occupation and control of a zone of land',
+        'The Republic of Panama grants to the United States in perpetuity the use, occupation and control of a zone of land',
         'https://avalon.law.yale.edu/20th_century/pan001.asp',
         'Article II records the legal grant of long-term control to the United States. Treaty language establishes the agreement’s terms, not whether those terms were fair or popular.'],
       b:['Panamanian municipal support','Panamanian municipal resolution, December 1903',
@@ -71,13 +71,13 @@
     },
     dominican:{
       a:['Roosevelt: U.S. authority to intervene','Annual presidential message to Congress, December 1904',
-        'the exercise of an international police power',
+        'may force the United States, however reluctantly, in flagrant cases of such wrongdoing or impotence, to the exercise of an international police power',
         'https://www.archives.gov/milestone-documents/roosevelt-corollary',
         'Roosevelt’s 1904 presidential message argues that the United States might act as a regional police power. This is the president’s justification for intervention, not a report measuring the fairness of a customs arrangement.'],
-      b:['An earlier customs-revenue proposal','U.S. diplomatic correspondence reporting negotiations, 1905',
-        'Distribute 40 per cent annual receipts among all creditors, remaining 60 to the Dominican Government.',
+      b:['An earlier Dominican customs-revenue proposal','U.S. minister Thomas C. Dawson reporting his conversation with the Dominican president, January 1905',
+        'He agreed, and said that his own idea was 40 per cent for the creditors and 60 per cent to the Dominican Government.',
         'https://history.state.gov/historicaldocuments/frus1905/d314',
-        'This January 1905 diplomatic telegram reports a proposed 40/60 customs split. It is a record of a negotiating position, not the later final arrangement; it does not reveal the eventual 55/45 division.'],
+        'U.S. minister Thomas C. Dawson wrote that the Dominican president suggested giving 40% to creditors and 60% to the Dominican government. This reports the president’s proposed allocation during negotiations, not the later arrangement; it does not reveal the eventual division.'],
       question:'Source A is Roosevelt’s argument justifying American intervention; Source B is a diplomatic record describing a proposed way to divide Dominican customs revenue. What reason does Roosevelt give for intervention, and what concrete financial action does the proposal describe? Whose view would you need before judging the plan’s fairness?',
       frames:['Roosevelt argued ___, while the proposal would divide ___; neither source establishes ___.','The argument for intervention addresses ___, whereas the allocation proposal concerns ___. A credible evaluation would also require ___ because ___.']
     }
@@ -93,6 +93,23 @@
     const frames=sec.querySelector('#'+id+'_compare')?.parentElement.querySelectorAll('.frame')||[];
     if(frames[0])frames[0].innerHTML=vocab(d.frames[0]);
     if(frames[1])frames[1].innerHTML=vocab(d.frames[1]);
+  }
+
+  // Optional China investigation: one primary policy text, with a clearly bounded inference.
+  const china=document.getElementById('china');
+  const chinaInvestigation=china?.querySelector('#china_investigate');
+  if(chinaInvestigation){
+    const documentSection=document.createElement('div');
+    documentSection.className='china-primary-source';
+    documentSection.innerHTML='<h3>Read the policy in its author’s own words</h3>'+
+      '<p class="small"><strong>Your task:</strong> John Hay was writing to foreign governments in 1899. Identify the trading principle he wanted them to accept. Then distinguish his requested policy from evidence that other countries accepted it—or that Chinese people consented.</p>'+
+      sourceCard('A','John Hay’s First Open Door Note','U.S. Secretary of State John Hay, September 6, 1899',
+        'they shall enjoy perfect equality of treatment for their commerce and navigation within such “spheres,”',
+        'https://history.state.gov/historicaldocuments/frus1899/d88',
+        'Context (not a quotation): Hay asked other foreign powers to recognize equal commercial access in their areas of influence in China. This letter establishes what the U.S. government requested, not whether foreign governments obeyed or Chinese communities approved.')+
+      '<div class="source-thinking"><strong>Reading move:</strong> The phrase “perfect equality” refers to trade among foreign powers. Whose rights and choices are not directly discussed in the excerpt?</div>';
+    const reading=chinaInvestigation.querySelector('.reading');
+    if(reading)reading.after(documentSection);else chinaInvestigation.prepend(documentSection);
   }
 
   // Drag-and-drop is a *presentation* enhancement. The existing rank-field IDs and
