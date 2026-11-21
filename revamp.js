@@ -117,7 +117,31 @@ powerFrames:['___ gained authority over ___, while ___ had less control over ___
 }
 };
 function richField(id,label,frames,optional){registry.push({id,label,optional:!!optional});return '<div class="field deep"><label for="'+id+'">'+vocab(label)+'</label><textarea id="'+id+'" data-field="'+id+'" maxlength="4500" rows="4"></textarea><p class="frame">'+vocab(frames[0])+'</p><p class="frame">'+vocab(frames[1])+'</p></div>'}
-function richRank(id,labels){registry.push({id,label:(id.endsWith('_rank_first')?'Initial motives ranking':'Revised motives ranking'),optional:false});let html='<div class="rank-widget" data-rank="'+id+'"><h3>Rank the motives</h3><p>Move the explanations into order from strongest (1) to weakest (4), based on the evidence you have seen so far. There is no automatic correct ranking.</p><div class="rank-items"></div><input type="hidden" data-field="'+id+'" id="'+id+'"></div>';return html}
+const RANK_PROMPTS={
+oregon:{
+question:'In 1898, why might U.S. naval leaders have wanted a stronger network of overseas ports and coaling stations as the USS Oregon prepared to sail from California to Florida?',
+context:'Rank the four possible reasons in order of how strongly you think they explain American interest in expanding naval reach. Consider the war with Spain, the location of U.S. warships, and the needs of overseas commerce.',
+first:'Before examining the additional voyage records and Mahan’s argument, rank the possible reasons for expanding U.S. naval reach.',
+second:'After examining the voyage records and Mahan’s argument, rank those same reasons again. Which now has the strongest historical support?'
+},
+economy:{
+question:'As U.S. factories and international trade expanded between 1870 and 1900, which economic goals might have most strongly encouraged American leaders and businesses to pursue greater influence overseas?',
+context:'Rank these four possible economic motives by their likely importance. Use the industrial growth and trade information, while remembering that economic expansion did not make territorial annexation inevitable.',
+first:'Before examining the additional trade statistics and historical arguments, rank the possible economic reasons for overseas influence.',
+second:'After examining the trade statistics and Mahan’s commercial arguments, re-rank those economic motives according to the evidence.'
+},
+panama:{
+question:'Why did U.S. leaders want to build and secure a canal across Panama in the early 1900s?',
+context:'Rank the four possible motives behind the American canal project, from the most convincing explanation to the least convincing. Consider what the USS Oregon voyage showed about distance, as well as commerce, military mobility, international competition, and political control.',
+first:'Before examining the additional treaty evidence, rank the possible American motives for pursuing the Panama Canal.',
+second:'After examining the canal treaty and Panamanian perspectives, re-rank the possible American motives and identify any uncertainty.'
+}
+};
+function richRank(id,labels){
+const section=id.split('_')[0],isRevised=id.endsWith('_rank_second'),p=RANK_PROMPTS[section],phase=isRevised?'Revised':'Initial';
+registry.push({id,label:phase+' motive ranking — '+(p?p.question:section),optional:false});
+return '<div class="rank-widget" data-rank="'+id+'"><h3>'+(isRevised?'Revised ranking':'Initial ranking')+'</h3><p><strong>'+vocab(p?p.question:'Rank the historical motives in this section.')+'</strong></p><p>'+vocab(p?p.context:'Use the available historical evidence.')+'</p><p>Drag the four possible motives into order from <strong>most convincing (1)</strong> to <strong>least convincing (4)</strong>. There may be more than one defensible ranking; you must explain your reasoning in the writing box below.</p><div class="rank-items"></div><input type="hidden" data-field="'+id+'" id="'+id+'"></div>'
+}
 function rankUi(){document.querySelectorAll('[data-rank]').forEach(root=>{let id=root.dataset.rank,sec=id.split('_')[0],base=RICH[sec].rank,stored=(state&&state.fields[id]?state.fields[id].split('|'):base.slice()),arr=stored.length===base.length&&stored.every(v=>base.includes(v))?stored:base.slice(),target=root.querySelector('.rank-items');target.innerHTML='';arr.forEach((name,i)=>{let row=document.createElement('div');row.className='rank-row';row.innerHTML='<strong>'+(i+1)+'</strong><span>'+esc(name)+'</span><button type="button" data-rank-move="'+id+'" data-idx="'+i+'" data-dir="-1" '+(i===0?'disabled':'')+' aria-label="Move up">↑</button><button type="button" data-rank-move="'+id+'" data-idx="'+i+'" data-dir="1" '+(i===arr.length-1?'disabled':'')+' aria-label="Move down">↓</button>';target.appendChild(row)});$(id).value=arr.join('|')})}
 function richPrepare(){
 const intros={
@@ -140,10 +164,10 @@ sub.innerHTML='<h3>Claims, evidence, and uncertainty</h3><p class="claim"><stron
 const rev=prior.querySelector('h3:last-of-type');prior.insertBefore(sub,rev);
 if(cfg.rank){
 const first=document.createElement('div');first.className='ranking-block';
-first.innerHTML='<h3>Your first ranking: before examining the additional evidence</h3>'+richRank(s.id+'_rank_first',cfg.rank)+richField(s.id+'_rank_why','What makes your top-ranked motive more plausible than the second? Explain your initial reasoning in 1–2 sentences.',['I ranked ___ above ___ because I already know ___.','My initial explanation prioritizes ___ over ___ because ___, although I still need evidence about ___.'],false);
+first.innerHTML='<h3>'+vocab(RANK_PROMPTS[s.id].first)+'</h3>'+richRank(s.id+'_rank_first',cfg.rank)+richField(s.id+'_rank_why','What makes your top-ranked motive more plausible than the second? Explain your initial reasoning in 1–2 sentences.',['I ranked ___ above ___ because I already know ___.','My initial explanation prioritizes ___ over ___ because ___, although I still need evidence about ___.'],false);
 el.querySelector('[data-commit="'+s.id+'"]').after(first);
 const later=document.createElement('div');later.className='ranking-block';
-later.innerHTML='<h3>Re-rank after examining the evidence</h3>'+richRank(s.id+'_rank_second',cfg.rank)+richField(s.id+'_rank_change','Compare the two rankings. Which evidence strengthened or challenged your original thinking? Explain in 1–2 sentences.',['I maintained/changed my ranking because ___ demonstrated ___.','The evidence about ___ complicated my original assumption that ___; now I think ___ because ___.'],false);
+later.innerHTML='<h3>'+vocab(RANK_PROMPTS[s.id].second)+'</h3>'+richRank(s.id+'_rank_second',cfg.rank)+richField(s.id+'_rank_change','Compare the two rankings. Which evidence strengthened or challenged your original thinking? Explain in 1–2 sentences.',['I maintained/changed my ranking because ___ demonstrated ___.','The evidence about ___ complicated my original assumption that ___; now I think ___ because ___.'],false);
 prior.insertBefore(later,rev);
 }
 
