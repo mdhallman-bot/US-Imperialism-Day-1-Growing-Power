@@ -1,5 +1,5 @@
 'use strict';
-const LESSON='us-imperialism-growing-power-2026-idls-preview',TAB='Imperialism_Growing_Power',CLOUD_URL='https://script.google.com/macros/s/AKfycbxJWtUSeB7Ey571MorHqlDJy_e9AzYjl1-e_fw4yarEMYCi-Vg4-_8d_lDv-Ee8s_4yzA/exec';
+const LESSON='us-imperialism-growing-power-2026-idls-preview',TAB='Imperialism_Growing_Power',CLOUD_URL='PREVIEW_DISABLED_NO_NETWORK';
 const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const keys=Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length),regex=new RegExp('\\b('+keys.join('|')+')\\b','gi');
 function vocab(t){return String(t).split(regex).map(p=>GLOSSARY[p.toLowerCase()]?'<button type="button" class="term" aria-expanded="false" title="'+esc(GLOSSARY[p.toLowerCase()])+'">'+esc(p)+'</button><span hidden class="def">'+esc(GLOSSARY[p.toLowerCase()])+'</span>':esc(p)).join('')}
