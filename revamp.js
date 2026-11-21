@@ -11,7 +11,8 @@ context:[
 'As war became increasingly likely, American naval leaders wanted powerful battleships near the Caribbean, where fighting might occur.',
 'One of their newer battleships, the USS Oregon (BB-3), was on the Pacific coast near San Francisco, thousands of miles from Florida.',
 'There was no Panama Canal in 1898, so a ship traveling by sea between American coasts faced the enormous route around South America.',
-'The challenge was not simply how fast the Oregon could travel: coal, repairs, weather, ports, communication, and the location of possible enemies all mattered.'
+'The challenge was not simply how fast the Oregon could travel: coal, repairs, weather, ports, communication, and the location of possible enemies all mattered.',
+'American leaders also debated how ships could operate far from home. They could negotiate permission to use ports in other countries, seek naval bases, or try to bring overseas territory under U.S. control. Adding territory to a country is called annexation. A navy might benefit from ports and bases, but the Oregon’s journey alone could not establish that annexation was necessary.'
 ],
 image:'https://media.defense.gov/2023/Feb/27/2003168318/-1/-1/0/230227-N-NH352-004.JPG',
 imageCaption:'USS Oregon (BB-3) photographed at sea. U.S. Naval History and Heritage Command.',
