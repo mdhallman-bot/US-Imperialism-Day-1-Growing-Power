@@ -35,11 +35,15 @@ revised:{skill:'inference',task:s=>'Revisit your original prediction about '+s.f
 after:{skill:'causation',task:s=>'Explain what the revealed outcome means for '+s.focus+'.',success:'Connect a historical result to an earlier cause or decision instead of simply reporting the answer.'}
 };
 function panel(skillName,task,success,compact){
-const el=document.createElement('div');el.className='idls-purpose'+(compact?' compact':'');el.setAttribute('role','note');
-const head=document.createElement('div');head.className='idls-purpose-head';head.textContent=skill[skillName]+'  ·  Skill from your learning report';
-const p=document.createElement('p');const strong=document.createElement('strong');strong.textContent='Your task: ';p.append(strong,task);
-const q=document.createElement('p');const successStrong=document.createElement('strong');successStrong.textContent='Success looks like: ';q.append(successStrong,success);
-el.append(head,p,q);return el;
+/* The question itself states the task; the full success criteria are taught
+   in the opening examples. Keep only the report-aligned skill reminder. */
+const el=document.createElement('div');
+el.className='idls-skill-tag';
+el.setAttribute('role','note');
+const cue=document.createElement('span');cue.className='idls-skill-cue';cue.textContent='Practicing: ';
+const name=document.createElement('strong');name.textContent=skill[skillName];
+el.append(cue,name);
+return el;
 }
 function beforeField(id,kind,s){
 const field=document.getElementById(id)?.closest('.field');const spec=tasks[kind];
@@ -52,11 +56,11 @@ if(el&&spec)el.before(panel(spec.skill,spec.task(s),spec.success,false));
 const intro=document.querySelector('#work > section:not(#finish)');
 if(intro){
 const heading=intro.querySelector('h2');
-if(heading){const note=document.createElement('aside');note.className='idls-goals';note.innerHTML='<strong>Connect today’s work to your learning report.</strong> The skill labels in this lesson match the five categories in your report. If a skill is one of your goals, look for its name beside an activity and use the “Success looks like” statement to guide your work. You do not need to share your individual results.';heading.after(note)}
+if(heading){const note=document.createElement('aside');note.className='idls-goals';note.innerHTML='<strong>Connect today’s work to your learning report.</strong> The skill labels in this lesson match the five categories in your report. The two practice examples below show what these skills look like. During the historical investigations, a small “Practicing” label will show where you can use each skill. You do not need to share your individual results.';heading.after(note)}
 }
 for(const [id,s] of Object.entries(scenarios)){
 s.id=id;const section=document.getElementById(id);if(!section)continue;
-const h=section.querySelector('h2');if(h){const n=document.createElement('div');n.className='idls-skill-note';n.textContent='You will see historical-thinking skill labels throughout this investigation. These match the categories on your learning report.';h.after(n)}
+// The historical story now begins without a repeated skill explanation.
 beforeField(id+'_initial','prediction',s);
 beforeField(id+'_close','close',s);
 beforeField(id+'_compare','compare',s);
@@ -74,6 +78,6 @@ const f2=document.getElementById('synthesis_2')?.closest('.field');
 if(f2)f2.before(panel('corroboration','Identify what further historical evidence is needed to judge whether U.S. expansion was justified.','Describe what the available sources establish, whose perspective is missing and why more evidence would matter.',false));
 }
 const style=document.createElement('style');
-style.textContent='.idls-goals{margin:14px 0 22px;padding:12px 15px;background:#edf4f8;border-left:4px solid #497b9c;border-radius:5px;line-height:1.5}.idls-skill-note{font-size:13px;color:#486174;margin:4px 0 16px}.idls-purpose{margin:18px 0 9px;border-left:3px solid #6a96b3;padding:10px 13px;background:#f3f8fa;border-radius:0 6px 6px 0}.idls-purpose.compact{margin:13px 0 7px;padding:8px 11px}.idls-purpose-head{font-size:12px;font-weight:750;color:#22577b;letter-spacing:.01em}.idls-purpose p{font-size:14px;line-height:1.5;margin:5px 0}.idls-purpose.compact p{font-size:13.5px}.idls-purpose strong{color:#17364b}';
+style.textContent=".idls-goals{margin:14px 0 22px;padding:12px 15px;background:#edf4f8;border-left:4px solid #497b9c;border-radius:5px;line-height:1.5}.idls-skill-tag{display:block;width:fit-content;max-width:100%;margin:14px 0 5px;padding:3px 8px;border-radius:4px;background:#eef4f8;color:#275370;font-size:12px;line-height:1.4}.idls-skill-tag strong{font-weight:700}.idls-skill-cue{font-weight:400}";
 document.head.append(style);
 })();
