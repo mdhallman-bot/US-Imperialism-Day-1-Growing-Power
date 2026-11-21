@@ -13,7 +13,7 @@
         sourceCard('A','Secretary of the Navy: Report on the USS Oregon','Official government report, 1898',
           'The Oregon was ordered to proceed from Bremerton, Wash., to San Francisco and prepare for a long voyage.',
           'https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/s/spanish-american-war/report-of-the-secretary-of-the-navy-1898-part-2.html',
-          'Context (not a quotation): The Navy sent the USS Oregon around South America to reinforce its Atlantic fleet. It reached Jupiter Inlet, Florida, on May 24. Annexation means adding another territory to a country. Some U.S. leaders favored acquiring overseas territory, but this Navy record only shows the ship’s orders and journey; it cannot establish why leaders supported annexation or whether taking territory was necessary.')+
+          'Context (not a quotation): The Navy sent the USS Oregon around South America to reinforce its Atlantic fleet. It reached Jupiter Inlet, Florida, on May 24. This record establishes the Navy’s orders and the journey. It does not prove that the United States needed to take control of overseas territory rather than use ports by agreement or pursue other options.')+
         sourceCard('B','Alfred Thayer Mahan: The Influence of Sea Power upon History','Naval strategist’s published argument, 1890',
           'The ships that thus sail to and fro must have secure ports to which to return',
           'https://www.historians.org/resource/the-influence-of-sea-power-on-history/',
