@@ -105,7 +105,7 @@
       '<p class="small"><strong>Your task:</strong> John Hay was writing to foreign governments in 1899. Identify the trading principle he wanted them to accept. Then distinguish his requested policy from evidence that other countries accepted it—or that Chinese people consented.</p>'+
       sourceCard('A','John Hay’s First Open Door Note','U.S. Secretary of State John Hay, September 6, 1899',
         'they shall enjoy perfect equality of treatment for their commerce and navigation within such “spheres,”',
-        'https://history.state.gov/historicaldocuments/frus1899/d88',
+        'https://china.usc.edu/node/20103',
         'Context (not a quotation): Hay asked other foreign powers to recognize equal commercial access in their areas of influence in China. This letter establishes what the U.S. government requested, not whether foreign governments obeyed or Chinese communities approved.')+
       '<div class="source-thinking"><strong>Reading move:</strong> The phrase “perfect equality” refers to trade among foreign powers. Whose rights and choices are not directly discussed in the excerpt?</div>';
     const reading=chinaInvestigation.querySelector('.reading');
