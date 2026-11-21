@@ -1,7 +1,7 @@
 /* IDLS preliminary mock-student pilot only. Key present in this PUBLIC demonstration file; replace with teacher-only server scoring before classroom use. */
 'use strict';
 (function(){
-const CHECK_VERSION='preview-v1', q=[
+const CHECK_VERSION='pilot-v1', q=[
 {id:'U4-D2-Q1',skill:'Corroboration and limits',cognitive:'analysis',stimulus:'multiple_sources',
  prompt:'A Navy report records officials arranging coal for the USS Oregon in 1898. Alfred Thayer Mahan argued in 1890 that a powerful navy needed access to distant stations. What further evidence would most directly test a claim that the U.S. had to annex foreign land to obtain such access?',
  source:'Source A: 1898 Navy report describes arranging coal for a warship. Source B: Mahan’s 1890 writing argues that distant naval operations require supporting stations. Both are summarized here; the lesson contains original source excerpts.',
