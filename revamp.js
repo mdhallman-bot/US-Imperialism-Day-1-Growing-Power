@@ -219,7 +219,17 @@ Object.assign(GLOSSARY,{
 'context':'The surrounding historical circumstances.',
 'nuanced':'Recognizing more than one important side or factor.',
 'plausible':'Reasonable, even if not proven.',
-'underlying':'Forming the deeper basis of something.'
+'underlying':'Forming the deeper basis of something.',
+'in perpetuity':'Forever, with no specified ending date.',
+'municipal council':'A group of officials who govern a city or town.',
+'Crown Lands':'Land historically belonging to the Hawaiian monarchy, claimed by the United States after annexation.',
+'international police power':'Claimed authority to intervene in another country in order to enforce order or protect interests.',
+'flagrant':'Very obvious or serious.',
+'impotence':'In this historical speech, an inability to act effectively; not a medical reference.',
+'original document':'A historical source in the words or form used by its creator.',
+'statistical series':'Related numerical records arranged across years to show changes.',
+'diplomatic':'Related to negotiations or official relations between governments.',
+'commerce':'Buying and selling goods, especially between places or countries.'
 });
 const newVocabPattern=new RegExp('\\b('+Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length).join('|')+')\\b','gi');
 vocab=function(text){return String(text).split(newVocabPattern).map(part=>{const explanation=GLOSSARY[part.toLowerCase()];return explanation?'<button type="button" class="term" aria-expanded="false" title="'+esc(explanation)+'">'+esc(part)+'</button><span hidden class="def">'+esc(explanation)+'</span>':esc(part)}).join('')};
