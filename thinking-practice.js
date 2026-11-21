@@ -37,7 +37,7 @@
       correct:0,
       skill:'Corroboration and limits',
       title:'2. Corroboration: What can two accounts establish?',
-      story:'Two students describe an incident in a hallway. <strong>Student A:</strong> “Jordan pushed Sam for no reason.” <strong>Student B:</strong> “I saw Jordan push Sam, but I didn’t see what happened before that.”',
+      story:'Two students describe an incident in a hallway. Student A says, “Jordan pushed Sam for no reason.” Student B says, “I saw Jordan push Sam, but I didn’t see what happened before that.”',
       task:'Compare the accounts. Identify what both support and what remains uncertain.',
       success:'Explain where accounts agree without assuming that they prove every detail or motive.',
       feedback:'Both accounts support the conclusion that a push occurred. They do not jointly establish why it happened: Student B did not see what came before. A camera recording or another firsthand account might help, though it could have limits too.',
