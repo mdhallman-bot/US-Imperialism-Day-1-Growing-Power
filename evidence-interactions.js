@@ -15,10 +15,10 @@
           'https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/s/spanish-american-war/report-of-the-secretary-of-the-navy-1898-part-2.html',
           'Context (not a quotation): The Navy sent the USS Oregon around South America to reinforce its Atlantic fleet. It reached Jupiter Inlet, Florida, on May 24. This record establishes the Navy’s orders and the journey. It does not prove that the United States needed to take control of overseas territory rather than use ports by agreement or pursue other options.')+
         sourceCard('B','Alfred Thayer Mahan: The Influence of Sea Power upon History','Naval strategist’s published argument, 1890',
-          'The ships that thus sail to and fro must have secure ports to which to return',
-          'https://www.historians.org/resource/the-influence-of-sea-power-on-history/',
-          'Context (not a quotation): Mahan argued that shipping, naval protection, and strategically located ports were interconnected. His publication predates the 1898 voyage. His argument describes a proposed national strategy, not an official explanation for a particular 1898 decision.')+
-        '</div><div class="source-thinking"><strong>Source-reading prompts</strong><p>Who created each source, when, and for what purpose? Which statement is an observation about events, and which is an argument about national policy? Does one necessarily prove the other?</p></div>';
+          'the ships of war of the United States, in war, will be like land birds, unable to fly far from their own shores.',
+          'https://www.ruhr-uni-bochum.de/gna/Quellensammlung/07/07_alfredtmahaninfluenceofseapower_1890.htm',
+          'Context (not a quotation): Mahan used this comparison to argue that a powerful navy needed places far from home where its ships could obtain coal, make repairs, and find protection. He discussed overseas stations and colonies, but also acknowledged that friendly foreign ports could be useful during peace. His 1890 argument predates the Oregon voyage and does not establish that annexation was the only possible solution.')+
+        '</div><div class="source-thinking"><strong>Source-reading prompts</strong><p>Who created each source, when, and for what purpose? Which statement records what happened, and which argues for a national policy? What does Mahan mean by comparing warships to land birds? Does the Oregon voyage alone prove that the United States needed to annex territory?</p></div>';
       const compare=section.querySelector('#oregon_compare');
       if(compare){
         const label=section.querySelector('label[for="oregon_compare"]');
