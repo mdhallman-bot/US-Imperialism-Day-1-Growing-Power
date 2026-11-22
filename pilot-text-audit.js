@@ -36,5 +36,17 @@
       if(p.querySelector('button button'))issues.push(id+': nested definition button');
     }
   }
+  // Regression for the Nov 21 glossary leak: hidden .def nodes must stay hidden
+  // after sections are rearranged; never flatten DOM-rich text using textContent.
+  for(const section of document.querySelectorAll('.idls-section-orientation,.sourcekit')){
+    for(const def of section.querySelectorAll('.def[hidden]')){
+      if(getComputedStyle(def).display!=='none')issues.push('hidden glossary definition became visible');
+    }
+  }
+  // Intro directions should contain no flattened definition text.
+  for(const p of document.querySelectorAll('.idls-section-purpose')){
+    if(/contextThe surrounding historical circumstances|investigatestudy carefully|navalrelated to a navy/i.test(p.textContent))
+      issues.push('flattened glossary definition detected in section introduction');
+  }
   if(issues.length)console.warn('IDLS historical-context typography audit:',issues);
 })();
