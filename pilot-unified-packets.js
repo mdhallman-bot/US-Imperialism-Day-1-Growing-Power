@@ -2,17 +2,17 @@
 'use strict';
 (function(){
  const prompts={
-   oregon:{q:'According to the background paragraphs above, what made it difficult to move the USS Oregon from California to Florida in 1898?',
+   oregon:{q:'In Background paragraphs 5–7 above, what made it difficult to move the USS Oregon from California to Florida in 1898?',
      frames:['The Oregon had difficulty traveling because ___ and ___.','The lack of ___ made the journey harder, while ___ added another obstacle.']},
-   economy:{q:'According to the background paragraphs above, how did factories, railroads, and steamships help American businesses reach customers overseas?',
+   economy:{q:'In Background paragraphs 1–3 above, how did factories, railroads, and steamships help American businesses reach customers overseas?',
      frames:['Factories ___, while railroads and steamships helped ___.','Industrial production increased ___, and improved transportation made it possible to ___.']},
-   hawaii:{q:'According to the background paragraphs above, why did some Native Hawaiians oppose annexation by the United States?',
+   hawaii:{q:'In Background paragraphs 5–7 above, why did some Native Hawaiians oppose annexation by the United States?',
      frames:['Some Native Hawaiians opposed annexation because ___.','The historical context describes opposition to ___, particularly because ___.']},
-   panama:{q:'According to the background paragraphs above, why did Colombia’s rejection of a canal agreement matter to U.S. leaders?',
+   panama:{q:'In Background paragraphs 4–6 above, why did Colombia’s rejection of a canal agreement matter to U.S. leaders?',
      frames:['Colombia’s decision mattered because the United States wanted ___.','The rejection created a problem for U.S. plans to ___ because ___.']},
-   dominican:{q:'According to the background paragraphs above, how might U.S. control of customs collection affect Dominican decision-making?',
+   dominican:{q:'In Background paragraphs 4–6 above, how might U.S. control of customs collection affect Dominican decision-making?',
      frames:['U.S. control of customs could limit Dominican control over ___.','Even if the arrangement helped ___, it could reduce the government’s ability to ___.']},
-   china:{q:'According to the background paragraphs above, what did U.S. officials want other countries to allow in China?',
+   china:{q:'In the Background paragraph above, what did U.S. officials want other countries to allow in China?',
      frames:['U.S. officials wanted access to ___.','The policy sought ___ without requiring the United States to ___.']}
  };
  // China is the optional extension; the original build lacked a visible
@@ -34,6 +34,7 @@
    intro.innerHTML='<p class="idls-driving-question">How could the United States seek commercial influence in China without annexing it?</p><p class="idls-one-direction"><strong>Your path:</strong> Read the background, predict, examine the Open Door source, and use the cartoon for a brief evidence-based interpretation.</p>';
    heading?.insertAdjacentElement('afterend',intro);
  }
+ const closeRefs={oregon:'paragraphs 5–7',economy:'paragraphs 1–3',hawaii:'paragraphs 3–4',panama:'paragraphs 1–3',dominican:'paragraphs 2–5'};
  const sourceLabels={oregon:'USS Oregon records and Mahan’s argument',economy:'Trade figures and policy choices',hawaii:'Hawaiian political voices and U.S. claims',panama:'Canal plans and political authority',dominican:'Revenue allocation and Dominican sovereignty',china:'John Hay’s Open Door Note'};
  for(const [id,def] of Object.entries(prompts)){
    const section=document.getElementById(id);
@@ -107,7 +108,7 @@
      if(chinaSource){chinaSource.classList.add('idls-packet-sources');if(reading)reading.after(chinaSource);}
      const close=document.getElementById(id+'_close')?.closest('.field');
      if(close){
-       const revised='Close read — In the numbered Background paragraphs above, identify one cause-and-effect explanation. Name the paragraph and a detail that supports it. What is one conclusion that those paragraphs alone cannot prove?';
+       const revised='Close read — In Background '+(closeRefs[id]||'paragraphs above')+', identify one cause-and-effect explanation. Name the specific paragraph and a supporting detail. What is one conclusion these paragraphs alone cannot prove?';
        const label=close.querySelector('label');if(label)label.innerHTML=vocab(revised);
        const reg=registry.find(f=>f.id===id+'_close');if(reg)reg.label=revised;
      }
