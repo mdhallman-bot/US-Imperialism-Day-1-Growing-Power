@@ -163,5 +163,32 @@
  '@media(max-width:700px){.idls-investigation-packet{padding:12px;}.idls-cartoon-mini{padding:12px;}}'
  ].join('');
  document.head.appendChild(style);
+ // Non-destructive regression audit: run after all preview components have mounted.
+ const issues=[];
+ for(const id of ['oregon','economy','hawaii','panama','dominican','china']){
+   const el=document.getElementById(id), packet=el?.querySelector('.idls-investigation-packet');
+   if(!packet)issues.push(id+': missing unified investigation packet');
+   if(!packet?.querySelector('[data-packet-paragraph]'))issues.push(id+': missing numbered background paragraphs');
+   if(!document.getElementById(id+'_context_direct'))issues.push(id+': missing direct-answer field');
+   if(!registry.some(x=>x.id===id+'_context_direct'))issues.push(id+': direct answer not registered for PDF and completion');
+   if(!packet?.contains(document.getElementById(id+'_investigate')))issues.push(id+': original evidence no longer inside packet');
+ }
+ const cartoon=document.getElementById('idls-china-cartoon');
+ if(!cartoon||!cartoon.querySelector('img[src="assets/china-stepping-stone.jpg"]'))issues.push('China: local cartoon asset absent');
+ for(const id of ['china_cartoon_notice','china_cartoon_infer1','china_cartoon_infer2']){
+   if(!document.getElementById(id)||!registry.some(x=>x.id===id))issues.push('China: missing cartoon response '+id);
+ }
+ const allFields=[...document.querySelectorAll('[data-field]')];
+ const ids=allFields.map(x=>x.id);
+ if(new Set(ids).size!==ids.length)issues.push('Duplicate response field IDs');
+ for(const t of allFields.filter(x=>x.tagName==='TEXTAREA')){
+   if(t.closest('.field')?.querySelectorAll('.frame').length!==2)issues.push('Missing or excess sentence frames on '+t.id);
+ }
+ for(const p of document.querySelectorAll('.idls-section-orientation p')){
+   if(/contextThe surrounding historical circumstances|investigatestudy carefully/i.test(p.textContent))
+     issues.push('Flattened glossary definition leaked into section directions');
+ }
+ window.IDLS_PACKET_AUDIT={status:issues.length?'review_needed':'static_dom_pass',issues,checkedSections:6};
+ if(issues.length)console.warn('IDLS packet review:',issues);
  if(state){fill();completion();}
 })();
