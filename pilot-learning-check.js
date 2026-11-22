@@ -29,7 +29,7 @@ const CHECK_VERSION='pilot-v1', q=[
  why:'Dominican contemporary accounts provide evidence about local perspectives, though they would still require corroboration.',wrong:['U.S. ship supply record does not show Dominican opinion','','Distance cannot reveal consent or evaluation','Unrelated trade series cannot reveal Dominican opinion']}
 ];
 const root=document.createElement('article');root.id='idls-check';root.innerHTML='<p class="small">IDLS PREVIEW · ~6–8 minutes · Independent transfer</p><h2>Learning Check — America’s Growing Power</h2><p>Try these five new questions after the investigation. Use the evidence and reasoning you practiced, but make your own judgment. This is a <strong>demonstration only</strong>: scoring occurs on this device and does not go to Google Sheets.</p><div id="idls-questions"></div><button id="idls-submit" type="button">Submit learning check (mock grading)</button><p id="idls-score" class="note" role="status" aria-live="polite"></p><p class="small">Completion grade and learning-check score measure different things. The first counts filled responses; the second checks answers.</p>';
-$('sections').appendChild(root);
+$('finish').insertAdjacentElement('afterbegin',root);
 const holder=$('idls-questions');
 for(const item of q){const s=document.createElement('div');s.style.cssText='padding:15px;margin:14px 0;border:1px solid #d0dde6;border-radius:9px;background:#f8fbfc';s.innerHTML='<p class="small"><strong>'+esc(item.id)+'</strong> · '+esc(item.skill)+'</p><p class="reading">'+vocab(item.source)+'</p>'+field('idls_'+item.id,item.prompt,item.choices,[],false);holder.append(s)}
 $('nav').insertAdjacentHTML('beforeend','<a href="#idls-check">Independent learning check (mock)</a>');
