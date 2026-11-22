@@ -27,17 +27,15 @@
      '<p class="idls-one-direction"><strong>Your path:</strong> '+vocab(minisequence)+'</p>'+
      '<p class="idls-one-direction"><strong>When writing:</strong> '+vocab(vocabularyDirection)+'</p>';
    heading.after(orientation);
-   // richPrepare left a direction paragraph after the context; move it into the orientation.
-   for(const lead of oldLeads){const purpose=document.createElement('p');purpose.className='idls-section-purpose';purpose.textContent=lead.textContent.trim();orientation.insertBefore(purpose,orientation.children[1]);lead.remove();}
-   if(intro && intro!==context && intro.tagName==='P'){
-     const text=intro.textContent.trim();
-     if(text && text!==question){
-       const purpose=document.createElement('p');
-       purpose.className='idls-section-purpose';
-       purpose.textContent=text;
-       orientation.insertBefore(purpose,orientation.children[1]);
-       intro.remove();
-     }
+   // Move existing DOM nodes, not textContent: hidden glossary definitions live
+   // inside these paragraphs and textContent would expose them as visible text.
+   // A node is moved only once, even if it matches both discovery paths.
+   const leads=new Set(oldLeads);
+   if(intro && intro!==context && intro.tagName==='P')leads.add(intro);
+   for(const lead of leads){
+     if(!lead.isConnected)continue;
+     lead.classList.add('idls-section-purpose');
+     orientation.insertBefore(lead,orientation.children[1]);
    }
    // Retain glossary access, but place its visual footprint at the top, not mid-story.
    const wordList=context.querySelector('.word-list');
@@ -64,8 +62,8 @@
    const storyboard=context.querySelector('.storyboard');
    if(storyboard){
       storyboard.classList.add('idls-storyboard-quiet');
-      const original=storyboard.textContent.trim();
-      storyboard.textContent=original.replace(/^Storyboard connection:\s*/,'');
+      // Preserve child glossary DOM rather than flattening hidden definitions.
+      // The label is unobtrusive after styling; it need not be rewritten.
    }
    // The quick check remains immediately after the complete historical context.
    const mini=section.querySelector('.idls-mainidea');
