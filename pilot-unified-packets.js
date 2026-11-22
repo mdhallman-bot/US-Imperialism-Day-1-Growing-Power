@@ -15,6 +15,25 @@
    china:{q:'According to the background paragraphs above, what did U.S. officials want other countries to allow in China?',
      frames:['U.S. officials wanted access to ___.','The policy sought ___ without requiring the United States to ___.']}
  };
+ // China is the optional extension; the original build lacked a visible
+ // background packet. Wrap its existing lead without duplicating the reading.
+ const chinaSection=document.getElementById('china');
+ if(chinaSection && !chinaSection.querySelector('.sourcekit')){
+   const heading=chinaSection.querySelector('h2');
+   const originalLead=heading?.nextElementSibling;
+   const context=document.createElement('div');
+   context.className='sourcekit';
+   context.innerHTML='<h3>Background</h3>';
+   if(originalLead?.tagName==='P'){
+     // Move the real paragraph so vocabulary buttons and hidden definitions survive.
+     context.appendChild(originalLead);
+   }
+   heading?.insertAdjacentElement('afterend',context);
+   const intro=document.createElement('aside');
+   intro.className='idls-section-orientation';
+   intro.innerHTML='<p class="idls-driving-question">How could the United States seek commercial influence in China without annexing it?</p><p class="idls-one-direction"><strong>Your path:</strong> Read the background, predict, examine the Open Door source, and use the cartoon for a brief evidence-based interpretation.</p>';
+   heading?.insertAdjacentElement('afterend',intro);
+ }
  const sourceLabels={oregon:'USS Oregon records and Mahan’s argument',economy:'Trade figures and policy choices',hawaii:'Hawaiian political voices and U.S. claims',panama:'Canal plans and political authority',dominican:'Revenue allocation and Dominican sovereignty',china:'John Hay’s Open Door Note'};
  for(const [id,def] of Object.entries(prompts)){
    const section=document.getElementById(id);
