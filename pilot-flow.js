@@ -19,6 +19,7 @@
    const context=section.querySelector('.sourcekit');
    if(!heading||!context)continue;
    const intro=heading.nextElementSibling;
+   const oldLeads=[...section.querySelectorAll(':scope > p')].filter(p=>/^(Read the context|Follow the money|Use the USS Oregon problem)/i.test(p.textContent.trim()));
    const orientation=document.createElement('aside');
    orientation.className='idls-section-orientation';
    orientation.setAttribute('aria-label','How to approach this investigation');
@@ -26,6 +27,8 @@
      '<p class="idls-one-direction"><strong>Your path:</strong> '+vocab(minisequence)+'</p>'+
      '<p class="idls-one-direction"><strong>When writing:</strong> '+vocab(vocabularyDirection)+'</p>';
    heading.after(orientation);
+   // richPrepare left a direction paragraph after the context; move it into the orientation.
+   for(const lead of oldLeads){const purpose=document.createElement('p');purpose.className='idls-section-purpose';purpose.textContent=lead.textContent.trim();orientation.insertBefore(purpose,orientation.children[1]);lead.remove();}
    if(intro && intro!==context && intro.tagName==='P'){
      const text=intro.textContent.trim();
      if(text && text!==question){
