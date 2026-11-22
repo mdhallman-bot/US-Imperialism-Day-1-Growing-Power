@@ -87,6 +87,22 @@
      if(paragraphs[2])paragraphs[2].textContent='Use the arrows to reorder the motives. Explain your choice below.';
    }
  }
+ // Unambiguous source targeting for all five close-reading questions.
+ // Keep the registry label in sync so PDF prompts match the screen.
+ for(const sec of ['oregon','economy','hawaii','panama','dominican']){
+   const id=sec+'_close',el=$(id),box=el?.closest('.field');
+   if(!box)continue;
+   const prompt='Close read — Use the paragraphs under “Historical context” at the beginning of this investigation (not the later “Original reading” or primary-source excerpts). Identify one cause-and-effect explanation in those paragraphs. Cite a specific detail from them, then explain one conclusion those paragraphs alone cannot prove.';
+   const label=box.querySelector('label');
+   if(label)label.innerHTML=vocab(prompt);
+   const entry=registry.find(x=>x.id===id);
+   if(entry)entry.label=prompt;
+   const frames=[
+     'The opening Historical context explains that ___ helped cause ___. One supporting detail in those paragraphs is ___. Those paragraphs alone cannot prove ___.',
+     'According to the Historical context, ___ contributed to ___ because ___. However, this background explanation does not establish ___ without additional evidence.'
+   ];
+   box.querySelectorAll('.frame').forEach((node,i)=>{if(frames[i])node.innerHTML=vocab(frames[i]);});
+ }
  const style=document.createElement('style');
  style.textContent='.idls-section-orientation{margin:14px 0 18px;padding:16px 18px;border-left:4px solid #b57b37;background:#f5f8f9;border-radius:8px;line-height:1.55}.idls-driving-question{font-weight:750;color:#17364b;font-size:1.2em;line-height:1.4;margin:0 0 8px}.idls-one-direction{font-size:15px;margin:8px 0}.idls-section-purpose{color:#405b6b;margin:5px 0 9px;font-size:15px}.idls-section-orientation details{margin-top:9px}.idls-section-orientation summary{font-weight:650;cursor:pointer;color:#225678}.idls-word-help .word-list{padding:8px 0}.idls-optional-strategy .callout{margin:8px 0 0}.idls-storyboard-quiet{font-size:13px;opacity:.8;line-height:1.4}.idls-mainidea-inline{margin-top:14px;margin-bottom:17px;padding:10px 14px}.idls-mainidea-inline > p:first-child{margin:0}.idls-mainidea-inline .field{margin:3px 0 4px}.idls-mainidea-inline .field label{font-size:15px}.ranking-block h3{margin:14px 0 8px}.rank-widget > p{margin:6px 0 10px}';
  document.head.appendChild(style);
