@@ -100,6 +100,20 @@
      'According to the Historical context, ___ contributed to ___ because ___. However, this background explanation does not establish ___ without additional evidence.'
    ];
    box.querySelectorAll('.frame').forEach((node,i)=>{if(frames[i])node.innerHTML=vocab(frames[i]);});
+   // A completely unrelated model demonstrates the reasoning, not the historical answer.
+   // Show the model during the first investigation; keep it available on demand
+   // in later sections so students gradually work with less prompting.
+   if(label && !box.querySelector('.idls-close-example')){
+     const example=document.createElement('details');
+     example.className='idls-close-example';
+     if(sec==='oregon')example.open=true;
+     example.innerHTML='<summary>Example of the reasoning (different topic)</summary>'+
+       '<p><strong>Claim:</strong> A school’s new evening library hours may have increased library use.</p>'+
+       '<p><strong>Supporting detail:</strong> Its sign-in records show 40 weekly visits before the change and 65 afterward.</p>'+
+       '<p><strong>Limit:</strong> Those numbers alone do not prove the new hours caused the increase; other changes might also explain it.</p>'+
+       '<p class="small"><strong>Your turn:</strong> Use a cause, a specific detail, and a limit from this investigation’s Historical context—not from this example.</p>';
+     label.insertAdjacentElement('afterend',example);
+   }
  }
  const style=document.createElement('style');
  style.textContent='.idls-section-orientation{margin:14px 0 18px;padding:16px 18px;border-left:4px solid #b57b37;background:#f5f8f9;border-radius:8px;line-height:1.55}.idls-driving-question{font-weight:750;color:#17364b;font-size:1.2em;line-height:1.4;margin:0 0 8px}.idls-one-direction{font-size:15px;margin:8px 0}.idls-section-purpose{color:#405b6b;margin:5px 0 9px;font-size:15px}.idls-section-orientation details{margin-top:9px}.idls-section-orientation summary{font-weight:650;cursor:pointer;color:#225678}.idls-word-help .word-list{padding:8px 0}.idls-optional-strategy .callout{margin:8px 0 0}.idls-storyboard-quiet{font-size:13px;opacity:.8;line-height:1.4}.idls-mainidea-inline{margin-top:14px;margin-bottom:17px;padding:10px 14px}.idls-mainidea-inline > p:first-child{margin:0}.idls-mainidea-inline .field{margin:3px 0 4px}.idls-mainidea-inline .field label{font-size:15px}.ranking-block h3{margin:14px 0 8px}.rank-widget > p{margin:6px 0 10px}';
