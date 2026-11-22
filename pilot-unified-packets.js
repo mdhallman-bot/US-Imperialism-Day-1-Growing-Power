@@ -121,7 +121,7 @@
  if(dest && !document.getElementById('idls-china-cartoon')){
    const cartoon=document.createElement('section');
    cartoon.id='idls-china-cartoon';cartoon.className='idls-cartoon-mini';
-   const img='https://upload.wikimedia.org/wikipedia/commons/4/42/Stepping_Stone_to_China_Market_JUDGE_1900.jpg';
+   const img='assets/china-stepping-stone.jpg';
    cartoon.innerHTML='<h3>China: A political cartoon from 1900</h3>'+
      '<p><strong>Look first, then infer.</strong> The figure in red, white, and blue is Uncle Sam, representing the United States. Examine the labels, the goods he carries, and the land beneath his feet.</p>'+
      '<figure class="historical-media"><img src="'+img+'" loading="lazy" alt="Emil Flohri cartoon: Uncle Sam steps on the Philippines on his way toward China carrying industrial materials, goods, and symbols of education and religion." style="max-height:none;width:100%;height:auto" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><p class="note" hidden>Image unavailable. Open the linked archival copy to view the cartoon.</p><figcaption>Emil Flohri, “And, After All, the Philippines Are Only the Stepping-Stone to China,” <em>Judge</em>, March 21, 1900. <a href="https://commons.wikimedia.org/wiki/File:Stepping_Stone_to_China_Market_JUDGE_1900.jpg" target="_blank" rel="noopener noreferrer">Open the historical cartoon and its source</a>. Select image to enlarge.</figcaption></figure>'+
