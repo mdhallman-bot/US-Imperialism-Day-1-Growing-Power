@@ -66,6 +66,16 @@
       p.innerHTML=vocab('Work independently. Predict first, then examine historical evidence, reconsider your judgment, and reveal the outcome. Complete every required response, including the five-minute China cartoon. Hover, tap or focus underlined words for definitions. Use reading help whenever needed.');
     }
   }
+  // Print source provenance in standard and Emergency PDF reports.
+  const previousReport=report;
+  report=function(){
+    return previousReport().concat([{label:'China cartoon source',answer:'Emil Flohri, “And, After All, the Philippines Are Only the Stepping-Stone to China,” Judge, March 21, 1900. Historical cartoon showing an American viewpoint; locally bundled image.'}]);
+  };
+  // Ensure new required cartoon fields do not inherit the old optional-China label.
+  const introParagraph=document.querySelector('#work > section p');
+  if(introParagraph && introParagraph.textContent.includes('China investigation is optional')){
+    console.warn('IDLS: obsolete optional-China instruction remains');
+  }
   // The model's completion credit is derived from registry; future responses
   // will use the updated required set. Old answers remain in state for safety.
   const scope=new Set(main.map(id=>id+'_mainidea').concat(main.map(id=>id+'_context_direct')));
