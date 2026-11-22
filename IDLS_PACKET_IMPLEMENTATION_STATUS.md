@@ -33,3 +33,10 @@ Status: BUILT / SOURCE-AUDITED / STATIC JS CHECKED — BROWSER ACCEPTANCE OPEN
 
 ## Rollout constraint
 Do not copy this preview into the live classroom assignment or claim classroom-ready until teacher approves flow and browser/PDF, state and asset checks pass. Preserve existing student work and existing cloud save architecture.
+
+## November 22 scope reduction — teacher clarification
+- Teacher identified three adjacent overlapping items: **10-second historical context MC**, **one-sentence Quick response**, and **initial prediction**. Keep the *initial prediction* as the single immediate judgment in Oregon, Economy, Hawaiʻi, Panama, and Dominican Republic. Remove context MC and Quick response from active registry/UI; preserve existing response-state keys rather than deleting saved work. Later distinct source analysis and revised judgments remain.
+- China is **required**, approximately five minutes, and **cartoon-only**. Retired optional China prediction, reading, document excerpt, reveal and other responses are absent from active registry/UI, but original saved data are not erased. Student faces 3 response boxes: observations, stepping-stone inference and China-market inference; both inference answers require cartoon details.
+- Preview-only `pilot-revamp.js` replaces the script reference `revamp.js` only on `pilot-preview.html`, enforcing China navigation completion and labeling it as a required tab. Original production `revamp.js` is unchanged.
+- Preview-only `pilot-consolidation.js` loads after packet, ranking and vocabulary scripts. Audit available at `window.IDLS_CONSOLIDATION_AUDIT` (runtime test still required). Source citation is included in both PDF report functions.
+- GitHub updated and JavaScript syntax checked, standards updated to master/spec/log v1.0 and general history standard v1.7. **Still not browser-tested or classroom ready.** Before release, verify China completion gating, answer persistence, rankings, both PDFs, and independent Learning Check. Teacher's full walkthrough is still pending.
