@@ -58,6 +58,8 @@
     state.fields[id]=value;
     $(id).value=value;
     rankUi();
+    // Re-rendered rows also need drag enabled for another adjustment.
+    for(const row of root.querySelectorAll('.rank-row')){row.draggable=true;row.setAttribute('role','listitem');}
     const status=root.querySelector('.rank-confirmed');
     if(status)status.textContent='Ranking saved. Drag again to revise.';
     changed();
