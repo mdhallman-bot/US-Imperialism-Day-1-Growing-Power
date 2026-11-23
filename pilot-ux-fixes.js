@@ -10,7 +10,7 @@
     '#viewer::backdrop{background:rgba(9,24,35,.85);}',
     '.idls-vocab-visible{display:block;margin-top:8px;}',
     '.idls-vocab-visible .word-list{display:flex;gap:8px;flex-wrap:wrap;}',
-    '.rank-widget .rank-row{cursor:grab;user-select:none;touch-action:pan-y;background:#f6f9fb;transition:background .1s,border-color .1s;}',
+    '.rank-widget .rank-row{cursor:grab;user-select:none;touch-action:none;background:#f6f9fb;transition:background .1s,border-color .1s;}',
     '.rank-widget .rank-row:before{content:"⋮⋮";font-size:26px;color:#637d8d;margin-right:8px;letter-spacing:-5px;}',
     '.rank-widget .rank-row[aria-grabbed="true"],.rank-widget .rank-row.idls-drop-target{background:#e2eff8;border:2px solid #42789d;}',
     '.rank-widget .rank-row button[data-rank-move]{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}',
@@ -184,20 +184,6 @@
   const questions=document.querySelectorAll('#idls-questions > div');
   for(const q of questions){
     const text=q.textContent;
-    if(text.includes('Nominal dollars are not adjusted for inflation')){
-      const reading=[...q.querySelectorAll('p')].find(p=>p.textContent.includes('Nominal dollars are not adjusted for inflation'));
-      if(reading){
-        const example=document.createElement('p');example.className='note';
-        example.innerHTML='Example: If a shirt cost $5 in 1870 and $10 in 1900, its price doubled. That does <strong>not</strong> mean twice as many shirts were sold. “Nominal dollars” do not adjust for changing prices.';
-        reading.after(example);
-      }
-    }
-    if(text.includes('plebiscite of Hawaiian residents')){
-      for(const p of q.querySelectorAll('p'))if(p.textContent.includes('plebiscite of Hawaiian residents'))p.innerHTML=vocab(p.textContent.replace('The resolution did not constitute a plebiscite of Hawaiian residents.','Congress did not hold a direct vote of Hawaiian residents about annexation.'));
-    }
-    if(text.includes('helped administer Dominican customs collection')){
-      for(const p of q.querySelectorAll('p'))if(p.textContent.includes('helped administer Dominican customs collection'))p.innerHTML=vocab(p.textContent.replace('helped administer Dominican customs collection','helped collect and manage Dominican customs taxes'));
-    }
   }
   window.IDLS_UX_FIX_AUDIT=()=>({
     visibleVocab:document.querySelectorAll('.idls-vocab-visible').length,
