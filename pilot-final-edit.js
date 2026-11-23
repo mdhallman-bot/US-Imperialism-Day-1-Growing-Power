@@ -102,8 +102,14 @@
        if(label)label.innerHTML=vocab(prompts.a);
        const frames=oldBox.querySelectorAll('.frame');
        frames.forEach((node,i)=>{if(prompts.af[i])node.innerHTML=vocab(prompts.af[i]);});
+       // Version the substantially rewritten source question. Previously saved
+       // _close data remain untouched in state, but cannot be silently counted
+       // as answering this new source observation.
+       close.id=id+'_source_a';
+       close.dataset.field=id+'_source_a';
+       if(label)label.htmlFor=id+'_source_a';
        const item=registry.find(f=>f.id===id+'_close');
-       if(item)item.label=prompts.a;
+       if(item){item.id=id+'_source_a';item.label=prompts.a;}
        const example=oldBox.querySelector('.idls-close-example');
        if(example)example.remove();
        const textarea=oldBox.querySelector('textarea');if(textarea)textarea.rows=2;
@@ -192,7 +198,7 @@
  const problems=[];
  for(const id of investigations){
    const el=document.getElementById(id);
-   for(const requiredId of [id+'_initial',id+'_close',id+'_source_b',id+'_compare']){
+   for(const requiredId of [id+'_initial',id+'_source_a',id+'_source_b',id+'_compare']){
      if(!el?.contains(document.getElementById(requiredId)))problems.push(id+': missing '+requiredId);
    }
    if(el?.querySelector('.idls-mainidea,.idls-quick-answer'))problems.push(id+': leftover question shell');
