@@ -39,7 +39,7 @@
         root.appendChild(controls);
       }
       const status=root.querySelector('.rank-confirmed');
-      if(status)status.textContent=valid?'Ranking saved. You can revise the order.':'Choose your order with the arrows, then select “Record this ranking.”';
+      if(status)status.textContent=valid?'Ranking saved. You can revise the order.':'Drag the cards into order, then choose “Record this ranking.”';
       target.setAttribute('role','list');
       for(const row of target.querySelectorAll('.rank-row')){
         row.classList.add('drag-rank-row');
