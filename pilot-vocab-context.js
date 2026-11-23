@@ -26,6 +26,7 @@ for(const [section,question,choices,key,explanation] of checks){
 }
 const writers=registry.filter(f=>$(f.id)?.tagName==='TEXTAREA');
 for(const f of writers){
+ if(f.id!=='synthesis_1')continue; // selective historical vocabulary: full synthesis only
  const section=f.id.startsWith('synthesis_')?'synthesis':f.id.split('_')[0];
  f.idlsTerms=terms[section]||terms.synthesis;
  const note=document.createElement('div');note.className='idls-writing-vocab';
@@ -84,6 +85,6 @@ const oldReport=report;report=function(){
 document.addEventListener('input',e=>{if(e.target.matches('textarea[data-field]'))setTimeout(()=>{feedback();completion()},0)});
 document.addEventListener('change',e=>{if(e.target.id.endsWith('_mainidea'))setTimeout(()=>{feedback();completion()},0)});
 const finish=$('finish');
-finish?.insertAdjacentHTML('afterbegin','<div class="note"><strong>How completion credit works:</strong> A selected answer earns one completion credit. A filled written response earns one credit if it includes two different listed vocabulary terms, otherwise half credit. Blank required responses receive zero. Vocabulary detection checks for words, not whether they are used correctly. This grade measures completion requirements, NOT historical accuracy.</div><p id="idls-vocab-summary" class="small" aria-live="polite"></p>');
+finish?.insertAdjacentHTML('afterbegin','<div class="note"><strong>How completion credit works:</strong> A selected answer earns one completion credit. Only the first final synthesis response requires two listed vocabulary terms for full completion credit (half credit if it is answered without two terms). Other completed responses receive normal completion credit. Blank required responses receive zero. Vocabulary detection checks for words, not whether they are used correctly. This grade measures completion requirements, NOT historical accuracy.</div><p id="idls-vocab-summary" class="small" aria-live="polite"></p>');
 const style=document.createElement('style');style.textContent='.idls-mainidea,.idls-writing-vocab{background:#f1f6fa;border-left:4px solid #507c96;border-radius:6px;padding:12px 15px;margin:12px 0}.idls-mainidea{border:1px solid #c3d7e5}.idls-writing-vocab{font-size:14px;line-height:1.6}.idls-term-status{display:block;font-weight:650;margin-top:5px}';document.head.append(style);
 })();
