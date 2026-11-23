@@ -181,6 +181,10 @@
    const reg=registry.find(f=>f.id==='hawaii_initial');if(reg)reg.label=question;
    const note=document.createElement('p');note.className='small';note.textContent='Each option includes some useful information. Choose the combination you think would be strongest, then check that judgment against the historical sources.';
    box?.appendChild(note);
+   const button=hawaii.querySelector('[data-commit="hawaii"]');
+   if(button)button.textContent='Record initial evidence judgment';
+   const orientation=hawaii.querySelector('.idls-section-orientation .idls-one-direction');
+   if(orientation)orientation.innerHTML='<strong>Your path:</strong> Read the background. Choose which evidence you would trust most, then examine the historical documents, make an evidence-based comparison, and reveal what happened.';
  }
  // Remove stale vocabulary-at-every-answer and historic-context directions.
  document.querySelectorAll('.idls-word-help').forEach(el=>{const title=el.querySelector('summary');if(title)title.textContent='Vocabulary help (optional)';});
