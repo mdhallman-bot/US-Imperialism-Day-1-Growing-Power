@@ -124,7 +124,6 @@
    if(orientation){
      for(const p of orientation.querySelectorAll('p')){
        if(p.textContent.includes('Use at least two relevant vocabulary terms')){
-         p.innerHTML=vocab('<'+''); // overwritten below without flattening hidden definition nodes
          p.innerHTML='<strong>When writing:</strong> Use specific historical evidence. Vocabulary terms are available for help; two are required only in the first final synthesis answer.';
        }
      }
