@@ -46,6 +46,8 @@ function summary(){
  const required=registry.filter(f=>!f.optional);let filled=0,credit=0;const deductions=[];
  for(const f of required){
   const answer=(state?.fields?.[f.id]||'').trim();if(!answer)continue;
+  const control=$(f.id);
+  if(control?.tagName==='SELECT' && ![...control.options].some(opt=>opt.value===answer))continue; // Old response to a changed choice set is not current completion credit.
   filled++;
   if(f.idlsTerms){
    const matched=foundWords(answer,f.idlsTerms);
