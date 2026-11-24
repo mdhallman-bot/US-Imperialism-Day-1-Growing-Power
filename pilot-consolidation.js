@@ -37,11 +37,16 @@
     }
     const oldChinaIdx=LESSON_DATA.findIndex(x=>x.id==='china');
     if(oldChinaIdx>=0)LESSON_DATA.splice(oldChinaIdx,1); // removes only obsolete stage rendering, not saved answers
+    const navigation=china.querySelector(':scope > .page-actions');
     china.replaceChildren();
     const minutes=document.createElement('p');minutes.className='small';minutes.textContent='REQUIRED · About 5 minutes';
     const title=document.createElement('h2');title.textContent='China: What does this cartoon suggest about American expansion?';
     const intro=document.createElement('p');intro.innerHTML=vocab('The Philippines appear as a stepping-stone toward China. In this 1900 cartoon, look carefully at what Uncle Sam carries and what the cartoonist suggests the United States wanted. Observe first; then support two inferences with visible details.');
     china.append(minutes,title,intro,cartoon);
+    if(navigation){
+      navigation.querySelector('[data-page-next]').textContent='Next →';
+      china.appendChild(navigation);
+    }
     cartoon.classList.add('idls-required-cartoon');
     const h=cartoon.querySelector('h3');if(h)h.textContent='Notice → Infer → Support';
     for(const id of ['china_cartoon_notice','china_cartoon_infer1','china_cartoon_infer2']){
